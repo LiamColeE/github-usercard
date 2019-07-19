@@ -2,6 +2,17 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+axios.get("https://api.github.com/users/LiamColeE")
+  .then(function (response) {
+    console.log(response);
+    cards.appendChild(createCard(response.data));
+  })
+  .catch(function (err) {
+    console.log(err)
+  })
+  .finally(function () {
+    console.log("request complete");
+  })
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -24,7 +35,21 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ["tetondan", "dustinmyers", "justsml", "luishrd", "bigknell", "jacob", "jacobAngulo"];
+
+followersArray.forEach((element) => {
+  axios.get(`https://api.github.com/users/${element}`)
+    .then(function (response) {
+      console.log(response);
+      cards.appendChild(createCard(response.data));
+    })
+    .catch(function (err) {
+      console.log(err)
+    })
+    .finally(function () {
+      console.log("request complete");
+    })
+});
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -45,8 +70,59 @@ const followersArray = [];
 </div>
 
 */
+let cards = document.querySelector(".cards");
 
-/* List of LS Instructors Github username's: 
+let createCard = (object) => {
+  var outerDiv = document.createElement("div");
+  outerDiv.classList.add("card");
+
+  var img = document.createElement("img");
+  img.src = object.avatar_url;
+
+  var innerDiv = document.createElement("div");
+  innerDiv.classList.add("card-info");
+
+  var name = document.createElement("h3");
+  name.classList.add("name");
+  name.innerText = object.name;
+
+  var userName = document.createElement("p");
+  userName.classList.add("username");
+  userName.innerText = object.login;
+
+  var location = document.createElement("p");
+  location.innerText = "Location: " + object.location;
+
+  var profile = document.createElement("p");
+  profile.innerText = "Profile: "
+  var profileLink = document.createElement("a");
+  profileLink.href = object.html_url;
+  profileLink.innerText = object.html_url;
+  profile.appendChild(profileLink);
+
+  var followers = document.createElement("p");
+  followers.innerText = "Followers: " + object.followers;
+
+  var following = document.createElement("p");
+  following.innerText = "Following: " + object.following;
+
+  var bio = document.createElement("p");
+  bio.innerText = "Bio: " + object.bio;
+
+  outerDiv.appendChild(img);
+  outerDiv.appendChild(innerDiv);
+
+  innerDiv.appendChild(name);
+  innerDiv.appendChild(userName);
+  innerDiv.appendChild(location);
+  innerDiv.appendChild(profile);
+  innerDiv.appendChild(followers);
+  innerDiv.appendChild(following);
+  innerDiv.appendChild(bio);
+
+  return outerDiv;
+}
+/* List of LS Instructors Github username's:
   tetondan
   dustinmyers
   justsml
