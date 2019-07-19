@@ -3,14 +3,14 @@
            https://api.github.com/users/<your name>
 */
 axios.get("https://api.github.com/users/LiamColeE")
-  .then(function(response){
+  .then(function (response) {
     console.log(response);
     createCard(response.data);
   })
-  .catch(function(err){
+  .catch(function (err) {
     console.log(err)
   })
-  .finally(function(){
+  .finally(function () {
     console.log("request complete");
   })
 
@@ -35,20 +35,20 @@ axios.get("https://api.github.com/users/LiamColeE")
           user, and adding that card to the DOM.
 */
 
-const followersArray = [ "tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"];
+const followersArray = ["tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"];
 
 followersArray.forEach((element) => {
   axios.get(`https://api.github.com/users/${element}`)
-  .then(function(response){
-    console.log(response);
-    createCard(response.data);
-  })
-  .catch(function(err){
-    console.log(err)
-  })
-  .finally(function(){
-    console.log("request complete");
-  })
+    .then(function (response) {
+      console.log(response);
+      createCard(response.data);
+    })
+    .catch(function (err) {
+      console.log(err)
+    })
+    .finally(function () {
+      console.log("request complete");
+    })
 });
 
 /* Step 3: Create a function that accepts a single object as its only argument,
@@ -91,22 +91,22 @@ let createCard = (object) => {
   userName.innerText = object.login;
 
   var location = document.createElement("p");
-  location.innerText = "Location:" + object.location;
-  
+  location.innerText = "Location: " + object.location;
+
   var profile = document.createElement("p");
-  profile.innerText = "Profile:"
+  profile.innerText = "Profile: "
   var profileLink = document.createElement("a");
   profileLink.href = object.html_url;
   profile.appendChild(profileLink);
 
   var followers = document.createElement("p");
-  followers.innerText = "Followers:" + object.followers;
+  followers.innerText = "Followers: " + object.followers;
 
   var following = document.createElement("p");
-  following.innerText = "Following:" + object.following;
+  following.innerText = "Following: " + object.following;
 
   var bio = document.createElement("p");
-  bio.innerText = "Bio:" + object.bio;
+  bio.innerText = "Bio: " + object.bio;
 
   outerDiv.appendChild(img);
   outerDiv.appendChild(innerDiv);
@@ -121,7 +121,7 @@ let createCard = (object) => {
 
   cards.appendChild(outerDiv);
 }
-/* List of LS Instructors Github username's: 
+/* List of LS Instructors Github username's:
   tetondan
   dustinmyers
   justsml
