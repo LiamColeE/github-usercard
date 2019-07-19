@@ -5,7 +5,7 @@
 axios.get("https://api.github.com/users/LiamColeE")
   .then(function (response) {
     console.log(response);
-    createCard(response.data);
+    cards.appendChild(createCard(response.data));
   })
   .catch(function (err) {
     console.log(err)
@@ -41,7 +41,7 @@ followersArray.forEach((element) => {
   axios.get(`https://api.github.com/users/${element}`)
     .then(function (response) {
       console.log(response);
-      createCard(response.data);
+      cards.appendChild(createCard(response.data));
     })
     .catch(function (err) {
       console.log(err)
@@ -119,7 +119,8 @@ let createCard = (object) => {
   innerDiv.appendChild(following);
   innerDiv.appendChild(bio);
 
-  cards.appendChild(outerDiv);
+  //cards.appendChild(outerDiv);
+  return outerDiv;
 }
 /* List of LS Instructors Github username's:
   tetondan
