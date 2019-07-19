@@ -97,6 +97,7 @@ let createCard = (object) => {
   profile.innerText = "Profile: "
   var profileLink = document.createElement("a");
   profileLink.href = object.html_url;
+  profileLink.innerText = object.html_url;
   profile.appendChild(profileLink);
 
   var followers = document.createElement("p");
@@ -119,7 +120,6 @@ let createCard = (object) => {
   innerDiv.appendChild(following);
   innerDiv.appendChild(bio);
 
-  //cards.appendChild(outerDiv);
   return outerDiv;
 }
 /* List of LS Instructors Github username's:
